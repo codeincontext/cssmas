@@ -5,22 +5,22 @@
 
   <script type="text/javascript">
     $(function() {
-      var colors = ['#5B8151', '#B1C25E', '#4F6940'];
+      var colors = ['#5B8151', '#90BF5E', '#4F6940'];
       
       for (var i=0; i < 10; i++) {
-        var burst = $('<div class="burst" id="burst-'+i+'"></div>');
+        var burst = $('<div class="burst" id="burst-'+i+'">&nbsp</div>');
         var color = colors[i%colors.length];
+        if (i == 0) color = '#FFC900';
         var direction = (i % 2) ? 'rotate' : 'rotate-anti';
         
         
-        var size = ((i*30)+10)+'.px';
-        var marginLeft = '-'+((i*15))+'.px';
-        var marginTop = ''+((i*40)-600)+'.px';
+        var size = ((i*16)+10)+'px';
+        var marginLeft = '-'+((i*8))+'px';
+        var marginTop = ''+((i*20)-300)+'px';
         
         burst.css({
           width: size,
           height: size,
-          '-webkit-animation-name': 'rotate',
           'z-index': 10-i,
           'margin-left': marginLeft,
           'margin-top': marginTop,
@@ -40,6 +40,9 @@
     font-weight: normal;
     font-style: normal;
   }
+  body {
+    background-color: #8ED4F9;
+  }
   @-webkit-keyframes rotate {
     from {
       -webkit-transform: rotate(0deg);
@@ -48,13 +51,26 @@
       -webkit-transform: rotate(360deg);
     }
   }
+  @-moz-keyframes rotate {
+    from {
+      -moz-transform: rotate(0deg);
+    }
+    to { 
+      -moz-transform: rotate(360deg);
+    }
+  }
   
   .burst {
-/*    position: absolute;*/
     text-align: center;
     -webkit-animation-duration:         5s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
+    -webkit-animation-name: rotate;
+    -moz-animation-duration:         5s; 
+    -moz-animation-iteration-count:  infinite;
+    -moz-animation-timing-function: linear;
+    -moz-animation-name: rotate;
+    
     
     position: absolute;
     left: 50%;
@@ -66,10 +82,10 @@
     position: absolute;
     left:50%;
     top: 50%;
-    width: 100px;
-    height: 400px;
-    margin-left: -50px;
-    margin-top: -300px;
+    width: 50px;
+    height: 200px;
+    margin-left: -25px;
+    margin-top: -150px;
     
     -moz-border-radius-bottomright: 50px 35px;
     border-bottom-right-radius: 50px 35px;
@@ -80,14 +96,14 @@
   #merry, #merry:visited, #merry:active {
     display:block;
     color: #D90000;
-    font-size: 160px;
+    font-size: 80px;
     position: absolute;
     height: 100px;
     top: 50%;
-    margin-top: 150px;
-    margin-left: -500px;
+    margin-top: 100px;
+    margin-left: -300px;
     left: 50%;
-    width: 1000px;
+    width: 600px;
     text-align: center;
     font-family: silkscreennormal, monospace;
     font-weight: bold;
@@ -103,7 +119,7 @@
   </style>
 </head>
 <body>
-  <a id="merry" href="http://twitter.com/skattyadz">MERRY CHRISTMAS</a>
+  <a id="merry" href="http://twitter.com/skattyadz">MERRY CSSMAS!</a>
   <div id="stump">
 </body>
 </html>
