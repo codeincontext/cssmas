@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>skattyf.ckingadz.com</title>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      var colors = ['red', 'green', 'blue'];
+      
+      for (var i=0; i < 10; i++) {
+        var burst = $('<div class="burst" id="burst-'+i+'"></div>');
+        var color = colors[colors.length % i];
+        var size = ((i*100)+100)+'.px';
+        var margin = '-'+((i*50)+50)+'.px';
+        
+        burst.css({
+          width: size,
+          height: size,
+          '-webkit-animation-name': 'rotate',
+          'z-index': i,
+          'margin-left': margin,
+          'margin-top': margin,
+          background: color
+        });
+        
+        addCssRule('#burst-'+i+':before, #burst-'+i+':after', 'height: '+size);
+        addCssRule('#burst-'+i+':before, #burst-'+i+':after', 'width: '+size);
+        addCssRule('#burst-'+i+':before, #burst-'+i+':after', 'background-color: '+color+';');
+        $('body').append(burst);
+      };
+    });
+    
+    addCssRule = function(/* string */ selector, /* string */ rule) {
+      if (document.styleSheets) {
+        if (!document.styleSheets.length) {
+          var head = document.getElementsByTagName('head')[0];
+          head.appendChild(bc.createEl('style'));
+        }
+
+        var i = document.styleSheets.length-1;
+        var ss = document.styleSheets[i];
+
+        var l=0;
+        if (ss.cssRules) {
+          l = ss.cssRules.length;
+        } else if (ss.rules) {
+          // IE
+          l = ss.rules.length;
+        }
+
+        if (ss.insertRule) {
+          ss.insertRule(selector + ' {' + rule + '}', l);
+        } else if (ss.addRule) {
+          // IE
+          ss.addRule(selector, rule, l);
+        }
+      }
+    };
+  </script>
+  <style type="text/css">
+  @-webkit-keyframes rotate {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to { 
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes rotate-anti {
+    from {
+      -webkit-transform: rotate(360deg);
+    }
+    to { 
+      -webkit-transform: rotate(0deg);
+    }
+  }
+  
+  .burst {
+    position: absolute;
+    text-align: center;
+    -webkit-animation-duration:         5s; 
+    -webkit-animation-iteration-count:  infinite;
+    -webkit-animation-timing-function: linear;
+    
+    position: relative;
+    left: 50%;
+    top: 50%;
+  }
+  .burst:before, .burst:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+  }
+  .burst:before {
+      -webkit-transform: rotate(30deg);
+         -moz-transform: rotate(30deg);
+          -ms-transform: rotate(30deg);
+           -o-transform: rotate(30deg);
+  }
+  .burst:after {
+      -webkit-transform: rotate(60deg);
+         -moz-transform: rotate(60deg);
+          -ms-transform: rotate(60deg);
+           -o-transform: rotate(60deg);
+  }
+  </style>
+</head>
+<body>
+  <h1>skattyf.ckingadz.com</h1>
+  <div class="burst" id="burst-8"></div>
+  <div class="burst" id="burst-12"></div>
+</body>
+</html>
