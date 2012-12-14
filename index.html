@@ -1,64 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>skattyf.ckingadz.com</title>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
   <script type="text/javascript">
     $(function() {
-      var colors = ['red', 'green', 'blue'];
+      var colors = ['#5B8151', '#B1C25E', '#4F6940'];
       
       for (var i=0; i < 10; i++) {
         var burst = $('<div class="burst" id="burst-'+i+'"></div>');
-        var color = colors[colors.length % i];
-        var size = ((i*100)+100)+'.px';
-        var margin = '-'+((i*50)+50)+'.px';
+        var color = colors[i%colors.length];
+        var direction = (i % 2) ? 'rotate' : 'rotate-anti';
+        
+        
+        var size = ((i*30)+10)+'.px';
+        var marginLeft = '-'+((i*15))+'.px';
+        var marginTop = ''+((i*40)-600)+'.px';
         
         burst.css({
           width: size,
           height: size,
           '-webkit-animation-name': 'rotate',
-          'z-index': i,
-          'margin-left': margin,
-          'margin-top': margin,
+          'z-index': 10-i,
+          'margin-left': marginLeft,
+          'margin-top': marginTop,
           background: color
         });
         
-        addCssRule('#burst-'+i+':before, #burst-'+i+':after', 'height: '+size);
-        addCssRule('#burst-'+i+':before, #burst-'+i+':after', 'width: '+size);
-        addCssRule('#burst-'+i+':before, #burst-'+i+':after', 'background-color: '+color+';');
         $('body').append(burst);
       };
     });
-    
-    addCssRule = function(/* string */ selector, /* string */ rule) {
-      if (document.styleSheets) {
-        if (!document.styleSheets.length) {
-          var head = document.getElementsByTagName('head')[0];
-          head.appendChild(bc.createEl('style'));
-        }
 
-        var i = document.styleSheets.length-1;
-        var ss = document.styleSheets[i];
-
-        var l=0;
-        if (ss.cssRules) {
-          l = ss.cssRules.length;
-        } else if (ss.rules) {
-          // IE
-          l = ss.rules.length;
-        }
-
-        if (ss.insertRule) {
-          ss.insertRule(selector + ' {' + rule + '}', l);
-        } else if (ss.addRule) {
-          // IE
-          ss.addRule(selector, rule, l);
-        }
-      }
-    };
   </script>
   <style type="text/css">
+  @font-face {
+    font-family: 'silkscreennormal';
+    src: url("fonts/slkscr.eot");
+    src: url("fonts/slkscr.eot?#iefix") format("embedded-opentype"), url("fonts/slkscr.woff") format("woff"), url("fonts/slkscr.ttf") format("truetype"), url("fonts/slkscr.svg#silkscreennormal") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
   @-webkit-keyframes rotate {
     from {
       -webkit-transform: rotate(0deg);
@@ -67,49 +48,62 @@
       -webkit-transform: rotate(360deg);
     }
   }
-  @-webkit-keyframes rotate-anti {
-    from {
-      -webkit-transform: rotate(360deg);
-    }
-    to { 
-      -webkit-transform: rotate(0deg);
-    }
-  }
   
   .burst {
-    position: absolute;
+/*    position: absolute;*/
     text-align: center;
     -webkit-animation-duration:         5s; 
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
     
-    position: relative;
+    position: absolute;
     left: 50%;
     top: 50%;
   }
-  .burst:before, .burst:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
+
+  #stump {
+    background-color: #A17643;
+    position: absolute;
+    left:50%;
+    top: 50%;
+    width: 100px;
+    height: 400px;
+    margin-left: -50px;
+    margin-top: -300px;
+    
+    -moz-border-radius-bottomright: 50px 35px;
+    border-bottom-right-radius: 50px 35px;
+    -moz-border-radius-bottomleft: 50px 35px;
+    border-bottom-left-radius: 50px 35px;
   }
-  .burst:before {
-      -webkit-transform: rotate(30deg);
-         -moz-transform: rotate(30deg);
-          -ms-transform: rotate(30deg);
-           -o-transform: rotate(30deg);
+  
+  #merry, #merry:visited, #merry:active {
+    display:block;
+    color: #D90000;
+    font-size: 160px;
+    position: absolute;
+    height: 100px;
+    top: 50%;
+    margin-top: 150px;
+    margin-left: -500px;
+    left: 50%;
+    width: 1000px;
+    text-align: center;
+    font-family: silkscreennormal, monospace;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 1px 1px #FFC900, 2px 2px #FFC900, 3px 3px #FFC900, 4px 4px #FFC900, 5px 5px #FFC900, 6px 6px #FFC900, 7px 7px #FFC900, 8px 8px #FFC900, 9px 9px #FFC900;
   }
-  .burst:after {
-      -webkit-transform: rotate(60deg);
-         -moz-transform: rotate(60deg);
-          -ms-transform: rotate(60deg);
-           -o-transform: rotate(60deg);
+  #merry:hover {
+    padding-left: 4px;
+    padding-top: 4px;
+    text-shadow: 1px 1px #FFC900, 2px 2px #FFC900, 3px 3px #FFC900, 4px 4px #FFC900, 5px 5px #FFC900, 6px 6px #FFC900;
   }
+  #merry 
   </style>
 </head>
 <body>
-  <h1>skattyf.ckingadz.com</h1>
-  <div class="burst" id="burst-8"></div>
-  <div class="burst" id="burst-12"></div>
+  <a id="merry" href="http://twitter.com/skattyadz">MERRY CHRISTMAS</a>
+  <div id="stump">
 </body>
 </html>
